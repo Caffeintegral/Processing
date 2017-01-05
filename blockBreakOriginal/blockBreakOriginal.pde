@@ -79,7 +79,7 @@ class Intro {
 class Game {
   final int blockNumX = 20;                           // x軸方向のブロック数
   final int blockNumY = 5;                            // y軸方向のブロック数
-  final int boxNumX =1;
+  final int boxNumX =7;
   final int blockNumAll = blockNumX * blockNumY;      // 総ブロック数
   final int blockX_init = 0;                          // ブロック位置x軸初期値
   int blockX = 0;                                     // ブロック位置x軸
@@ -104,8 +104,8 @@ class Game {
     box = new Box[boxNumX];
     for (int i=0; i<box.length; i++) {
       
-        int x=50*i+50;
-        box[i]=new Box(x, 400, 20,20);
+        int x=50;
+        box[i]=new Box(x, 400, 20,20,i);
       
     }
     // ブロックのサイズを決定
@@ -419,26 +419,27 @@ class Block {
 
 class Box {
   float x;                       // 左上頂点のx座標
-  int y;                       // 左上頂点のy座標
+  float y;                       // 左上頂点のy座標
   int sizeX;                   // ブロックの幅
   int sizeY;                   // ブロックの高さ
-  int rad;
+  float rad;
   int r=10;
   int speed=1;
   // コンストラクタ
-  Box(float x, int y, int sizeX, int sizeY) {
+  Box(float x, int y, int sizeX, int sizeY, int i) {
     this.x = x;
     this.y = y;
     this.sizeX = sizeX;
     this.sizeY = sizeY;
+    rad=i*PI/4;
   }
 
   // ブロックの描画メソッド
   void show() {
     fill(114, 0, 0);
-    rad+=speed;
-    x+=cos(rad);
-    y+=sin(rad);
+    rad+=0.01;
+    x=cos(rad)*100+200;
+    y=sin(rad)*100+300;
     rect(x, y, sizeX, sizeY);
   }
 
